@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e28e000a2878474f93323a0e6131a98f" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="CourseProjectModel.C__Кассы" Width="1.5" PointX="2.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseProjectModel.sysdiagrams" Width="1.5" PointX="6.625" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseProjectModel.Вид_оплаты" Width="1.5" PointX="2.625" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseProjectModel.Дисконтная_карта" Width="1.5" PointX="2.625" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseProjectModel.Кассир" Width="1.5" PointX="5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseProjectModel.Категория" Width="1.5" PointX="10.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseProjectModel.Товары" Width="1.5" PointX="11" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseProjectModel.Товары_куплены" Width="1.5" PointX="6.875" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseProjectModel.Цена" Width="1.5" PointX="9" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseProjectModel.Чек_Покупки" Width="1.5" PointX="4.875" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseProjectModel.ProductsBought" Width="1.5" PointX="10.875" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseProjectModel.PurchaseReceipt" Width="1.75" PointX="8.625" PointY="8.875" IsExpanded="true" />
+        <AssociationConnector Association="CourseProjectModel.C__кассы_покипки" ManuallyRouted="false" />
+        <AssociationConnector Association="CourseProjectModel.Вид_оплаты_покупки" ManuallyRouted="false" />
+        <AssociationConnector Association="CourseProjectModel.Дисконтная_карта_используется" ManuallyRouted="false" />
+        <AssociationConnector Association="CourseProjectModel.Кто_пробил_чек" ManuallyRouted="false" />
+        <AssociationConnector Association="CourseProjectModel.Категория_товара" ManuallyRouted="false" />
+        <AssociationConnector Association="CourseProjectModel.Подкатегория" ManuallyRouted="false" />
+        <AssociationConnector Association="CourseProjectModel.Цена_на_товар" ManuallyRouted="false" />
+        <AssociationConnector Association="CourseProjectModel.Какая_цена" ManuallyRouted="false" />
+        <AssociationConnector Association="CourseProjectModel.Товары_в_чеке" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CourseProjectModel.ProductsWithPrice" Width="1.5" PointX="12.75" PointY="9.25" />
+        <EntityTypeShape EntityType="CourseProjectModel.CommentCashier" Width="1.5" PointX="7.125" PointY="6.375" />
+        <AssociationConnector Association="CourseProjectModel.FK_CommentCashier_Кассир" />
+        <EntityTypeShape EntityType="CourseProjectModel.CommentProduct" Width="1.5" PointX="8.75" PointY="4.5" />
+        <AssociationConnector Association="CourseProjectModel.FK_CommentProduct_Товары" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

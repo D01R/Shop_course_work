@@ -1,0 +1,76 @@
+﻿@model Kursach.Models.Registration
+@{
+    ViewBag.Title = "SignUp";
+}
+
+<style>
+    .mb-10 {
+        margin-bottom: 10px;
+    }
+
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+    }
+
+    .form-container {
+        width: 280px;
+        margin: auto;
+        margin-top: 10%;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 10px;
+        border-color: #ddd;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    .chekbutton {
+        background-color: #2a3132;
+        font-weight: bold;
+    }
+</style>
+<div class="form-container">
+    @using (Html.BeginForm("SingUp", "Auth", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <h4 class="center" style="font-weight:bold; color:#2a3132">Регистрация</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="mb-10 center">
+                @Html.EditorFor(model => model.Фамилия, new { htmlAttributes = new { @class = "form-control", placeholder = "Фамилия" } })
+                @Html.ValidationMessageFor(model => model.Фамилия, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-10 center">
+                @Html.EditorFor(model => model.Имя, new { htmlAttributes = new { @class = "form-control", placeholder = "Имя" } })
+                @Html.ValidationMessageFor(model => model.Имя, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-10 center">
+                @Html.EditorFor(model => model.login, new { htmlAttributes = new { @class = "form-control", placeholder = "Логин" } })
+                @Html.ValidationMessageFor(model => model.login, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-10 center">
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", type = "password", placeholder = "Пароль" } })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <div class="center">
+                    <input type="submit" value="Зарегистрироваться" class="btn btn-default chekbutton" style=" color:#90afc5;" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div>
+    @Html.ActionLink("Назад", "SignIn", "Auth")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

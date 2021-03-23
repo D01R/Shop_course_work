@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Kursach.Чек_Покупки>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .chek {
+        text-decoration: none;
+        font-family: sans-serif;
+        color: #2a3132;
+        display: inline-block;
+        padding: 3px;
+        border-bottom: 5px solid #2a3132;
+        font-weight: bold;
+    }
+
+    .chekbutton {
+        background-color: #2a3132;
+        font-weight: bold;
+    }
+</style>
+
+<h2 class=" chek">
+    Покупки
+</h2>
+<br />
+
+<p class="btn btn-default chekbutton" style="margin-bottom:12px;">
+
+    @Html.ActionLink("Количество безналичных/наличных платежей", "CountKinds", "Чек_Покупки", new { chek = Model }, null)
+</p>
+
+<table class="table">
+    <tr style="background-color:#90afc5; color:#2a3132; font-weight: bold">
+        <th>
+            Дата и время покупки
+        </th>
+        <th>
+            Номер кассы
+        </th>
+        <th>
+            Вид оплаты
+        </th>
+        <th>
+            Величина скидки
+        </th>
+        <th>
+            Кассир
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.OrderByDescending(i => i.Дата_и_время_покупки))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Дата_и_время_покупки)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.C__Кассы.Наименование)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Вид_оплаты.Наименование)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Дисконтная_карта.Величина_скидки)
+            </td>
+            <td>
+                @item.Кассир.Фамилия @item.Кассир.Имя
+            </td>
+            <td>
+                @Html.ActionLink("Продукты в чеке", "ProductsInCheck", new { id = item.Id_Чека })|
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id_Чека })
+            </td>
+        </tr>
+    }
+
+</table>
+

@@ -1,0 +1,87 @@
+﻿@model Kursach.Кассир
+
+@{
+    ViewBag.Title = "Нанять";
+}
+
+<style>
+    .category {
+        padding-bottom: 12px;
+    }
+
+    .chek {
+        text-decoration: none;
+        font-family: sans-serif;
+        color: #2a3132;
+        display: inline-block;
+        padding: 3px;
+        border-bottom: 5px solid #2a3132;
+        font-weight: bold;
+    }
+
+    .chekbutton {
+        background-color: #2a3132;
+        font-weight: bold;
+    }
+</style>
+
+<h2 class="chek">
+    Нанять снова
+</h2>
+
+
+<div>
+    <h4>Кассир</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Фамилия
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Фамилия)
+        </dd>
+
+        <dt>
+            Имя
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Имя)
+        </dd>
+
+        <dt>
+            Отчество
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Отчество)
+        </dd>
+
+        <dt>
+            Принят на работу
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Принят_на_работу)
+        </dd>
+
+        <dt>
+            Уволен
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Уволен)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="&#10004; Нанять снова" class="btn btn-default" style="background-color: #08d022; color: azure" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,64 @@
+﻿@model Kursach.Товары
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<style>
+    .category {
+        padding-bottom: 12px;
+    }
+
+    .chek {
+        text-decoration: none;
+        font-family: sans-serif;
+        color: #2a3132;
+        display: inline-block;
+        padding: 3px;
+        border-bottom: 5px solid #2a3132;
+        font-weight: bold;
+    }
+
+    .chekbutton {
+        background-color: #2a3132;
+        font-weight: bold;
+    }
+</style>
+
+<h2 class="chek">
+    Удаление
+</h2>
+
+<h3>Вы уверены, что хотите удалить данный чек?</h3>
+<div>
+    <h4>Товары</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Товар
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Наименование)
+        </dd>
+
+        <dt>
+            Категория
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Категория.Наименование)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="&#10008; Удалить" class="btn btn-default" style="background-color: #fb5d5d; color: azure" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

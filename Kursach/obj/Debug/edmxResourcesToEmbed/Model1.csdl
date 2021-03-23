@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CourseProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__Кассы">
+    <Key>
+      <PropertyRef Name="Id_Кассы" />
+    </Key>
+    <Property Name="Id_Кассы" Type="Guid" Nullable="false" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Чек_Покупки" Relationship="Self.C__кассы_покипки" FromRole="C__Кассы" ToRole="Чек_Покупки" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Вид_оплаты">
+    <Key>
+      <PropertyRef Name="Код_оплаты" />
+    </Key>
+    <Property Name="Код_оплаты" Type="Guid" Nullable="false" />
+    <Property Name="Наименование" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Чек_Покупки" Relationship="Self.Вид_оплаты_покупки" FromRole="Вид_оплаты" ToRole="Чек_Покупки" />
+  </EntityType>
+  <EntityType Name="Дисконтная_карта">
+    <Key>
+      <PropertyRef Name="Номер_Дисконтной_карты" />
+    </Key>
+    <Property Name="Номер_Дисконтной_карты" Type="Guid" Nullable="false" />
+    <Property Name="Величина_скидки" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Чек_Покупки" Relationship="Self.Дисконтная_карта_используется" FromRole="Дисконтная_карта" ToRole="Чек_Покупки" />
+  </EntityType>
+  <EntityType Name="Кассир">
+    <Key>
+      <PropertyRef Name="Id_Кассира" />
+    </Key>
+    <Property Name="Id_Кассира" Type="Guid" Nullable="false" />
+    <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Отчество" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Принят_на_работу" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Уволен" Type="DateTime" Precision="3" />
+    <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Соль" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Чек_Покупки" Relationship="Self.Кто_пробил_чек" FromRole="Кассир" ToRole="Чек_Покупки" />
+    <NavigationProperty Name="CommentCashier" Relationship="CourseProjectModel.FK_CommentCashier_Кассир" FromRole="Кассир" ToRole="CommentCashier" />
+  </EntityType>
+  <EntityType Name="Категория">
+    <Key>
+      <PropertyRef Name="Id_Категории" />
+    </Key>
+    <Property Name="Id_Категории" Type="Guid" Nullable="false" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FK_Id_Категории" Type="Guid" />
+    <NavigationProperty Name="Товары" Relationship="Self.Категория_товара" FromRole="Категория" ToRole="Товары" />
+    <NavigationProperty Name="Категория1" Relationship="Self.Подкатегория" FromRole="Категория" ToRole="Категория1" />
+    <NavigationProperty Name="Категория2" Relationship="Self.Подкатегория" FromRole="Категория1" ToRole="Категория" />
+  </EntityType>
+  <EntityType Name="Товары">
+    <Key>
+      <PropertyRef Name="Id_Товара" />
+    </Key>
+    <Property Name="Id_Товара" Type="Guid" Nullable="false" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Id_Категории" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Категория" Relationship="Self.Категория_товара" FromRole="Товары" ToRole="Категория" />
+    <NavigationProperty Name="Цена" Relationship="Self.Цена_на_товар" FromRole="Товары" ToRole="Цена" />
+    <NavigationProperty Name="CommentProduct" Relationship="CourseProjectModel.FK_CommentProduct_Товары" FromRole="Товары" ToRole="CommentProduct" />
+  </EntityType>
+  <EntityType Name="Товары_куплены">
+    <Key>
+      <PropertyRef Name="Id_Чека" />
+      <PropertyRef Name="Id_цена" />
+      <PropertyRef Name="Id_Товара" />
+    </Key>
+    <Property Name="Количество" Type="Int32" Nullable="false" />
+    <Property Name="Id_Чека" Type="Guid" Nullable="false" />
+    <Property Name="Id_цена" Type="Guid" Nullable="false" />
+    <Property Name="Id_Товара" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Цена" Relationship="Self.Какая_цена" FromRole="Товары_куплены" ToRole="Цена" />
+    <NavigationProperty Name="Чек_Покупки" Relationship="Self.Товары_в_чеке" FromRole="Товары_куплены" ToRole="Чек_Покупки" />
+  </EntityType>
+  <EntityType Name="Цена">
+    <Key>
+      <PropertyRef Name="Id_цена" />
+      <PropertyRef Name="Id_Товара" />
+    </Key>
+    <Property Name="Id_цена" Type="Guid" Nullable="false" />
+    <Property Name="Цена1" Type="Int64" Nullable="false" />
+    <Property Name="Дата_установки" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Дата_окончания" Type="DateTime" Precision="3" />
+    <Property Name="Id_Товара" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Товары" Relationship="Self.Цена_на_товар" FromRole="Цена" ToRole="Товары" />
+    <NavigationProperty Name="Товары_куплены" Relationship="Self.Какая_цена" FromRole="Цена" ToRole="Товары_куплены" />
+  </EntityType>
+  <EntityType Name="Чек_Покупки">
+    <Key>
+      <PropertyRef Name="Id_Чека" />
+    </Key>
+    <Property Name="Id_Чека" Type="Guid" Nullable="false" />
+    <Property Name="Дата_и_время_покупки" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Id_Кассира" Type="Guid" Nullable="false" />
+    <Property Name="Номер_Дисконтной_карты" Type="Guid" />
+    <Property Name="Код_оплаты" Type="Guid" Nullable="false" />
+    <Property Name="Id_Кассы" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="C__Кассы" Relationship="Self.C__кассы_покипки" FromRole="Чек_Покупки" ToRole="C__Кассы" />
+    <NavigationProperty Name="Вид_оплаты" Relationship="Self.Вид_оплаты_покупки" FromRole="Чек_Покупки" ToRole="Вид_оплаты" />
+    <NavigationProperty Name="Дисконтная_карта" Relationship="Self.Дисконтная_карта_используется" FromRole="Чек_Покупки" ToRole="Дисконтная_карта" />
+    <NavigationProperty Name="Кассир" Relationship="Self.Кто_пробил_чек" FromRole="Чек_Покупки" ToRole="Кассир" />
+    <NavigationProperty Name="Товары_куплены" Relationship="Self.Товары_в_чеке" FromRole="Чек_Покупки" ToRole="Товары_куплены" />
+  </EntityType>
+  <EntityType Name="ProductsBought">
+    <Key>
+      <PropertyRef Name="Товар" />
+    </Key>
+    <Property Name="Товар" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Количество" Type="Int32" />
+  </EntityType>
+  <EntityType Name="PurchaseReceipt">
+    <Key>
+      <PropertyRef Name="Id_Чека" />
+      <PropertyRef Name="Товар" />
+      <PropertyRef Name="Количество" />
+      <PropertyRef Name="Цена_за_единицу_товара" />
+    </Key>
+    <Property Name="Id_Чека" Type="Guid" Nullable="false" />
+    <Property Name="Товар" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Количество" Type="Int32" Nullable="false" />
+    <Property Name="Цена_за_единицу_товара" Type="Int64" Nullable="false" />
+    <Property Name="Общая_цена" Type="Int64" />
+  </EntityType>
+  <Association Name="C__кассы_покипки">
+    <End Role="C__Кассы" Type="Self.C__Кассы" Multiplicity="1" />
+    <End Role="Чек_Покупки" Type="Self.Чек_Покупки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C__Кассы">
+        <PropertyRef Name="Id_Кассы" />
+      </Principal>
+      <Dependent Role="Чек_Покупки">
+        <PropertyRef Name="Id_Кассы" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Вид_оплаты_покупки">
+    <End Role="Вид_оплаты" Type="Self.Вид_оплаты" Multiplicity="1" />
+    <End Role="Чек_Покупки" Type="Self.Чек_Покупки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Вид_оплаты">
+        <PropertyRef Name="Код_оплаты" />
+      </Principal>
+      <Dependent Role="Чек_Покупки">
+        <PropertyRef Name="Код_оплаты" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Дисконтная_карта_используется">
+    <End Role="Дисконтная_карта" Type="Self.Дисконтная_карта" Multiplicity="0..1" />
+    <End Role="Чек_Покупки" Type="Self.Чек_Покупки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Дисконтная_карта">
+        <PropertyRef Name="Номер_Дисконтной_карты" />
+      </Principal>
+      <Dependent Role="Чек_Покупки">
+        <PropertyRef Name="Номер_Дисконтной_карты" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Кто_пробил_чек">
+    <End Role="Кассир" Type="Self.Кассир" Multiplicity="1" />
+    <End Role="Чек_Покупки" Type="Self.Чек_Покупки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Кассир">
+        <PropertyRef Name="Id_Кассира" />
+      </Principal>
+      <Dependent Role="Чек_Покупки">
+        <PropertyRef Name="Id_Кассира" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Категория_товара">
+    <End Role="Категория" Type="Self.Категория" Multiplicity="1" />
+    <End Role="Товары" Type="Self.Товары" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Категория">
+        <PropertyRef Name="Id_Категории" />
+      </Principal>
+      <Dependent Role="Товары">
+        <PropertyRef Name="Id_Категории" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Подкатегория">
+    <End Role="Категория" Type="Self.Категория" Multiplicity="0..1" />
+    <End Role="Категория1" Type="Self.Категория" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Категория">
+        <PropertyRef Name="Id_Категории" />
+      </Principal>
+      <Dependent Role="Категория1">
+        <PropertyRef Name="FK_Id_Категории" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Цена_на_товар">
+    <End Role="Товары" Type="Self.Товары" Multiplicity="1" />
+    <End Role="Цена" Type="Self.Цена" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Товары">
+        <PropertyRef Name="Id_Товара" />
+      </Principal>
+      <Dependent Role="Цена">
+        <PropertyRef Name="Id_Товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Какая_цена">
+    <End Role="Цена" Type="Self.Цена" Multiplicity="1" />
+    <End Role="Товары_куплены" Type="Self.Товары_куплены" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Цена">
+        <PropertyRef Name="Id_цена" />
+        <PropertyRef Name="Id_Товара" />
+      </Principal>
+      <Dependent Role="Товары_куплены">
+        <PropertyRef Name="Id_цена" />
+        <PropertyRef Name="Id_Товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Товары_в_чеке">
+    <End Role="Чек_Покупки" Type="Self.Чек_Покупки" Multiplicity="1" />
+    <End Role="Товары_куплены" Type="Self.Товары_куплены" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Чек_Покупки">
+        <PropertyRef Name="Id_Чека" />
+      </Principal>
+      <Dependent Role="Товары_куплены">
+        <PropertyRef Name="Id_Чека" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__Кассы" EntityType="Self.C__Кассы" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Вид_оплаты" EntityType="Self.Вид_оплаты" />
+    <EntitySet Name="Дисконтная_карта" EntityType="Self.Дисконтная_карта" />
+    <EntitySet Name="Кассир" EntityType="Self.Кассир" />
+    <EntitySet Name="Категория" EntityType="Self.Категория" />
+    <EntitySet Name="Товары" EntityType="Self.Товары" />
+    <EntitySet Name="Товары_куплены" EntityType="Self.Товары_куплены" />
+    <EntitySet Name="Цена" EntityType="Self.Цена" />
+    <EntitySet Name="Чек_Покупки" EntityType="Self.Чек_Покупки" />
+    <EntitySet Name="ProductsBought" EntityType="Self.ProductsBought" />
+    <EntitySet Name="PurchaseReceipt" EntityType="Self.PurchaseReceipt" />
+    <AssociationSet Name="C__кассы_покипки" Association="Self.C__кассы_покипки">
+      <End Role="C__Кассы" EntitySet="C__Кассы" />
+      <End Role="Чек_Покупки" EntitySet="Чек_Покупки" />
+    </AssociationSet>
+    <AssociationSet Name="Вид_оплаты_покупки" Association="Self.Вид_оплаты_покупки">
+      <End Role="Вид_оплаты" EntitySet="Вид_оплаты" />
+      <End Role="Чек_Покупки" EntitySet="Чек_Покупки" />
+    </AssociationSet>
+    <AssociationSet Name="Дисконтная_карта_используется" Association="Self.Дисконтная_карта_используется">
+      <End Role="Дисконтная_карта" EntitySet="Дисконтная_карта" />
+      <End Role="Чек_Покупки" EntitySet="Чек_Покупки" />
+    </AssociationSet>
+    <AssociationSet Name="Кто_пробил_чек" Association="Self.Кто_пробил_чек">
+      <End Role="Кассир" EntitySet="Кассир" />
+      <End Role="Чек_Покупки" EntitySet="Чек_Покупки" />
+    </AssociationSet>
+    <AssociationSet Name="Категория_товара" Association="Self.Категория_товара">
+      <End Role="Категория" EntitySet="Категория" />
+      <End Role="Товары" EntitySet="Товары" />
+    </AssociationSet>
+    <AssociationSet Name="Подкатегория" Association="Self.Подкатегория">
+      <End Role="Категория" EntitySet="Категория" />
+      <End Role="Категория1" EntitySet="Категория" />
+    </AssociationSet>
+    <AssociationSet Name="Цена_на_товар" Association="Self.Цена_на_товар">
+      <End Role="Товары" EntitySet="Товары" />
+      <End Role="Цена" EntitySet="Цена" />
+    </AssociationSet>
+    <AssociationSet Name="Какая_цена" Association="Self.Какая_цена">
+      <End Role="Цена" EntitySet="Цена" />
+      <End Role="Товары_куплены" EntitySet="Товары_куплены" />
+    </AssociationSet>
+    <AssociationSet Name="Товары_в_чеке" Association="Self.Товары_в_чеке">
+      <End Role="Чек_Покупки" EntitySet="Чек_Покупки" />
+      <End Role="Товары_куплены" EntitySet="Товары_куплены" />
+    </AssociationSet>
+    <FunctionImport Name="ChangePrice">
+      <Parameter Name="Product" Mode="In" Type="String" />
+      <Parameter Name="NewPrice" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(CourseProjectModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(CourseProjectModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="ProductsWithPrice" EntityType="CourseProjectModel.ProductsWithPrice" />
+    <EntitySet Name="CommentCashier" EntityType="CourseProjectModel.CommentCashier" />
+    <AssociationSet Name="FK_CommentCashier_Кассир" Association="CourseProjectModel.FK_CommentCashier_Кассир">
+      <End Role="Кассир" EntitySet="Кассир" />
+      <End Role="CommentCashier" EntitySet="CommentCashier" />
+    </AssociationSet>
+    <EntitySet Name="CommentProduct" EntityType="CourseProjectModel.CommentProduct" />
+    <AssociationSet Name="FK_CommentProduct_Товары" Association="CourseProjectModel.FK_CommentProduct_Товары">
+      <End Role="Товары" EntitySet="Товары" />
+      <End Role="CommentProduct" EntitySet="CommentProduct" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="ProductsWithPrice">
+    <Key>
+      <PropertyRef Name="Id_Товара" />
+      <PropertyRef Name="Id_Категории" />
+      <PropertyRef Name="Id_цена" />
+      <PropertyRef Name="Товар" />
+      <PropertyRef Name="Категория" />
+      <PropertyRef Name="Цена" />
+      <PropertyRef Name="Дата_установки" />
+    </Key>
+    <Property Name="Id_Товара" Type="Guid" Nullable="false" />
+    <Property Name="Id_Категории" Type="Guid" Nullable="false" />
+    <Property Name="Id_цена" Type="Guid" Nullable="false" />
+    <Property Name="Товар" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Категория" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Цена" Type="Int64" Nullable="false" />
+    <Property Name="Дата_установки" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Дата_окончания" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="CommentCashier">
+    <Key>
+      <PropertyRef Name="Id_CommentCashier" />
+    </Key>
+    <Property Name="Id_CommentCashier" Type="Guid" Nullable="false" />
+    <Property Name="Id_Кассира" Type="Guid" Nullable="false" />
+    <Property Name="Nickname" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Кассир" Relationship="CourseProjectModel.FK_CommentCashier_Кассир" FromRole="CommentCashier" ToRole="Кассир" />
+  </EntityType>
+  <Association Name="FK_CommentCashier_Кассир">
+    <End Type="CourseProjectModel.Кассир" Role="Кассир" Multiplicity="1" />
+    <End Type="CourseProjectModel.CommentCashier" Role="CommentCashier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Кассир">
+        <PropertyRef Name="Id_Кассира" />
+      </Principal>
+      <Dependent Role="CommentCashier">
+        <PropertyRef Name="Id_Кассира" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CommentProduct">
+    <Key>
+      <PropertyRef Name="Id_CommentProduct" />
+    </Key>
+    <Property Name="Id_CommentProduct" Type="Guid" Nullable="false" />
+    <Property Name="Id_Товара" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Товары" Relationship="CourseProjectModel.FK_CommentProduct_Товары" FromRole="CommentProduct" ToRole="Товары" />
+  </EntityType>
+  <Association Name="FK_CommentProduct_Товары">
+    <End Type="CourseProjectModel.Товары" Role="Товары" Multiplicity="1" />
+    <End Type="CourseProjectModel.CommentProduct" Role="CommentProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Товары">
+        <PropertyRef Name="Id_Товара" />
+      </Principal>
+      <Dependent Role="CommentProduct">
+        <PropertyRef Name="Id_Товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

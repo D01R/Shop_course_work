@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище CourseProjectModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CommentCashier">
+    <Key>
+      <PropertyRef Name="Id CommentCashier" />
+    </Key>
+    <Property Name="Id CommentCashier" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Id Кассира" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Nickname" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CommentProduct">
+    <Key>
+      <PropertyRef Name="Id CommentProduct" />
+    </Key>
+    <Property Name="Id CommentProduct" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Id Товара" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="№ Кассы">
+    <Key>
+      <PropertyRef Name="Id Кассы" />
+    </Key>
+    <Property Name="Id Кассы" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Наименование" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Вид оплаты">
+    <Key>
+      <PropertyRef Name="Код оплаты" />
+    </Key>
+    <Property Name="Код оплаты" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Наименование" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Дисконтная карта">
+    <Key>
+      <PropertyRef Name="Номер Дисконтной карты" />
+    </Key>
+    <Property Name="Номер Дисконтной карты" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Величина скидки" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Кассир">
+    <Key>
+      <PropertyRef Name="Id Кассира" />
+    </Key>
+    <Property Name="Id Кассира" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Отчество" Type="varchar" MaxLength="30" />
+    <Property Name="Принят на работу" Type="datetime" Nullable="false" />
+    <Property Name="Уволен" Type="datetime" />
+    <Property Name="Логин" Type="varchar" MaxLength="50" />
+    <Property Name="Пароль" Type="varchar" MaxLength="50" />
+    <Property Name="Соль" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Категория">
+    <Key>
+      <PropertyRef Name="Id Категории" />
+    </Key>
+    <Property Name="Id Категории" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Наименование" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FK_Id Категории" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="Товары">
+    <Key>
+      <PropertyRef Name="Id Товара" />
+    </Key>
+    <Property Name="Id Товара" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Наименование" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Id Категории" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Товары куплены">
+    <Key>
+      <PropertyRef Name="Id Чека" />
+      <PropertyRef Name="Id цена" />
+      <PropertyRef Name="Id Товара" />
+    </Key>
+    <Property Name="Количество" Type="int" Nullable="false" />
+    <Property Name="Id Чека" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Id цена" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Id Товара" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Цена">
+    <Key>
+      <PropertyRef Name="Id цена" />
+      <PropertyRef Name="Id Товара" />
+    </Key>
+    <Property Name="Id цена" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Цена" Type="bigint" Nullable="false" />
+    <Property Name="Дата установки" Type="datetime" Nullable="false" />
+    <Property Name="Дата окончания" Type="datetime" />
+    <Property Name="Id Товара" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Чек Покупки">
+    <Key>
+      <PropertyRef Name="Id Чека" />
+    </Key>
+    <Property Name="Id Чека" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Дата и время покупки" Type="datetime" Nullable="false" />
+    <Property Name="Id Кассира" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Номер Дисконтной карты" Type="uniqueidentifier" />
+    <Property Name="Код оплаты" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Id Кассы" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "CourseProject.dbo.ProductsBought" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="ProductsBought">
+    <Key>
+      <PropertyRef Name="Товар" />
+    </Key>
+    <Property Name="Товар" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Количество" Type="int" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "CourseProject.dbo.ProductsWithPrice" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="ProductsWithPrice">
+    <Key>
+      <PropertyRef Name="Id Товара" />
+      <PropertyRef Name="Id Категории" />
+      <PropertyRef Name="Id цена" />
+      <PropertyRef Name="Товар" />
+      <PropertyRef Name="Категория" />
+      <PropertyRef Name="Цена" />
+      <PropertyRef Name="Дата установки" />
+    </Key>
+    <Property Name="Id Товара" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Id Категории" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Id цена" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Товар" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Категория" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Цена" Type="bigint" Nullable="false" />
+    <Property Name="Дата установки" Type="datetime" Nullable="false" />
+    <Property Name="Дата окончания" Type="datetime" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "CourseProject.dbo.PurchaseReceipt" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="PurchaseReceipt">
+    <Key>
+      <PropertyRef Name="Id Чека" />
+      <PropertyRef Name="Товар" />
+      <PropertyRef Name="Количество" />
+      <PropertyRef Name="Цена за единицу товара" />
+    </Key>
+    <Property Name="Id Чека" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Товар" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Количество" Type="int" Nullable="false" />
+    <Property Name="Цена за единицу товара" Type="bigint" Nullable="false" />
+    <Property Name="Общая цена" Type="bigint" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "CourseProject.dbo.PurchaseReceiptProducts" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <Association Name="FK_CommentCashier_Кассир">
+    <End Role="Кассир" Type="Self.Кассир" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CommentCashier" Type="Self.CommentCashier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Кассир">
+        <PropertyRef Name="Id Кассира" />
+      </Principal>
+      <Dependent Role="CommentCashier">
+        <PropertyRef Name="Id Кассира" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CommentProduct_Товары">
+    <End Role="Товары" Type="Self.Товары" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Товары">
+        <PropertyRef Name="Id Товара" />
+      </Principal>
+      <Dependent Role="CommentProduct">
+        <PropertyRef Name="Id Товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="№ кассы покипки">
+    <End Role="№ Кассы" Type="Self.№ Кассы" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Чек Покупки" Type="Self.Чек Покупки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="№ Кассы">
+        <PropertyRef Name="Id Кассы" />
+      </Principal>
+      <Dependent Role="Чек Покупки">
+        <PropertyRef Name="Id Кассы" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Вид оплаты покупки">
+    <End Role="Вид оплаты" Type="Self.Вид оплаты" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Чек Покупки" Type="Self.Чек Покупки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Вид оплаты">
+        <PropertyRef Name="Код оплаты" />
+      </Principal>
+      <Dependent Role="Чек Покупки">
+        <PropertyRef Name="Код оплаты" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Дисконтная карта используется">
+    <End Role="Дисконтная карта" Type="Self.Дисконтная карта" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Чек Покупки" Type="Self.Чек Покупки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Дисконтная карта">
+        <PropertyRef Name="Номер Дисконтной карты" />
+      </Principal>
+      <Dependent Role="Чек Покупки">
+        <PropertyRef Name="Номер Дисконтной карты" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Какая цена">
+    <End Role="Цена" Type="Self.Цена" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Товары куплены" Type="Self.Товары куплены" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Цена">
+        <PropertyRef Name="Id цена" />
+        <PropertyRef Name="Id Товара" />
+      </Principal>
+      <Dependent Role="Товары куплены">
+        <PropertyRef Name="Id цена" />
+        <PropertyRef Name="Id Товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Категория товара">
+    <End Role="Категория" Type="Self.Категория" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Товары" Type="Self.Товары" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Категория">
+        <PropertyRef Name="Id Категории" />
+      </Principal>
+      <Dependent Role="Товары">
+        <PropertyRef Name="Id Категории" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Кто пробил чек">
+    <End Role="Кассир" Type="Self.Кассир" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Чек Покупки" Type="Self.Чек Покупки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Кассир">
+        <PropertyRef Name="Id Кассира" />
+      </Principal>
+      <Dependent Role="Чек Покупки">
+        <PropertyRef Name="Id Кассира" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Подкатегория">
+    <End Role="Категория" Type="Self.Категория" Multiplicity="0..1" />
+    <End Role="Категория1" Type="Self.Категория" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Категория">
+        <PropertyRef Name="Id Категории" />
+      </Principal>
+      <Dependent Role="Категория1">
+        <PropertyRef Name="FK_Id Категории" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Товары в чеке">
+    <End Role="Чек Покупки" Type="Self.Чек Покупки" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Товары куплены" Type="Self.Товары куплены" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Чек Покупки">
+        <PropertyRef Name="Id Чека" />
+      </Principal>
+      <Dependent Role="Товары куплены">
+        <PropertyRef Name="Id Чека" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Цена на товар">
+    <End Role="Товары" Type="Self.Товары" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Цена" Type="Self.Цена" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Товары">
+        <PropertyRef Name="Id Товара" />
+      </Principal>
+      <Dependent Role="Цена">
+        <PropertyRef Name="Id Товара" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ChangePrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Product" Type="varchar" Mode="In" />
+    <Parameter Name="NewPrice" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Хранилище CourseProjectModelContainer">
+    <EntitySet Name="CommentCashier" EntityType="Self.CommentCashier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommentProduct" EntityType="Self.CommentProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="№ Кассы" EntityType="Self.№ Кассы" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Вид оплаты" EntityType="Self.Вид оплаты" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Дисконтная карта" EntityType="Self.Дисконтная карта" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Кассир" EntityType="Self.Кассир" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Категория" EntityType="Self.Категория" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Товары" EntityType="Self.Товары" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Товары куплены" EntityType="Self.Товары куплены" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Цена" EntityType="Self.Цена" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Чек Покупки" EntityType="Self.Чек Покупки" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductsBought" EntityType="Self.ProductsBought" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProductsBought].[Товар] AS [Товар], 
+    [ProductsBought].[Количество] AS [Количество]
+    FROM [dbo].[ProductsBought] AS [ProductsBought]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProductsWithPrice" EntityType="Self.ProductsWithPrice" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProductsWithPrice].[Id Товара] AS [Id Товара], 
+    [ProductsWithPrice].[Id Категории] AS [Id Категории], 
+    [ProductsWithPrice].[Id цена] AS [Id цена], 
+    [ProductsWithPrice].[Товар] AS [Товар], 
+    [ProductsWithPrice].[Категория] AS [Категория], 
+    [ProductsWithPrice].[Цена] AS [Цена], 
+    [ProductsWithPrice].[Дата установки] AS [Дата установки], 
+    [ProductsWithPrice].[Дата окончания] AS [Дата окончания]
+    FROM [dbo].[ProductsWithPrice] AS [ProductsWithPrice]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PurchaseReceipt" EntityType="Self.PurchaseReceipt" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PurchaseReceipt].[Id Чека] AS [Id Чека], 
+    [PurchaseReceipt].[Товар] AS [Товар], 
+    [PurchaseReceipt].[Количество] AS [Количество], 
+    [PurchaseReceipt].[Цена за единицу товара] AS [Цена за единицу товара], 
+    [PurchaseReceipt].[Общая цена] AS [Общая цена]
+    FROM [dbo].[PurchaseReceipt] AS [PurchaseReceipt]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CommentCashier_Кассир" Association="Self.FK_CommentCashier_Кассир">
+      <End Role="Кассир" EntitySet="Кассир" />
+      <End Role="CommentCashier" EntitySet="CommentCashier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CommentProduct_Товары" Association="Self.FK_CommentProduct_Товары">
+      <End Role="Товары" EntitySet="Товары" />
+      <End Role="CommentProduct" EntitySet="CommentProduct" />
+    </AssociationSet>
+    <AssociationSet Name="№ кассы покипки" Association="Self.№ кассы покипки">
+      <End Role="№ Кассы" EntitySet="№ Кассы" />
+      <End Role="Чек Покупки" EntitySet="Чек Покупки" />
+    </AssociationSet>
+    <AssociationSet Name="Вид оплаты покупки" Association="Self.Вид оплаты покупки">
+      <End Role="Вид оплаты" EntitySet="Вид оплаты" />
+      <End Role="Чек Покупки" EntitySet="Чек Покупки" />
+    </AssociationSet>
+    <AssociationSet Name="Дисконтная карта используется" Association="Self.Дисконтная карта используется">
+      <End Role="Дисконтная карта" EntitySet="Дисконтная карта" />
+      <End Role="Чек Покупки" EntitySet="Чек Покупки" />
+    </AssociationSet>
+    <AssociationSet Name="Какая цена" Association="Self.Какая цена">
+      <End Role="Цена" EntitySet="Цена" />
+      <End Role="Товары куплены" EntitySet="Товары куплены" />
+    </AssociationSet>
+    <AssociationSet Name="Категория товара" Association="Self.Категория товара">
+      <End Role="Категория" EntitySet="Категория" />
+      <End Role="Товары" EntitySet="Товары" />
+    </AssociationSet>
+    <AssociationSet Name="Кто пробил чек" Association="Self.Кто пробил чек">
+      <End Role="Кассир" EntitySet="Кассир" />
+      <End Role="Чек Покупки" EntitySet="Чек Покупки" />
+    </AssociationSet>
+    <AssociationSet Name="Подкатегория" Association="Self.Подкатегория">
+      <End Role="Категория" EntitySet="Категория" />
+      <End Role="Категория1" EntitySet="Категория" />
+    </AssociationSet>
+    <AssociationSet Name="Товары в чеке" Association="Self.Товары в чеке">
+      <End Role="Чек Покупки" EntitySet="Чек Покупки" />
+      <End Role="Товары куплены" EntitySet="Товары куплены" />
+    </AssociationSet>
+    <AssociationSet Name="Цена на товар" Association="Self.Цена на товар">
+      <End Role="Товары" EntitySet="Товары" />
+      <End Role="Цена" EntitySet="Цена" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

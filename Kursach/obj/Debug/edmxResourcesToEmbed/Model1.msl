@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище CourseProjectModelContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="C__Кассы">
+      <EntityTypeMapping TypeName="CourseProjectModel.C__Кассы">
+        <MappingFragment StoreEntitySet="№ Кассы">
+          <ScalarProperty Name="Id_Кассы" ColumnName="Id Кассы" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="CourseProjectModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Вид_оплаты">
+      <EntityTypeMapping TypeName="CourseProjectModel.Вид_оплаты">
+        <MappingFragment StoreEntitySet="Вид оплаты">
+          <ScalarProperty Name="Код_оплаты" ColumnName="Код оплаты" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Дисконтная_карта">
+      <EntityTypeMapping TypeName="CourseProjectModel.Дисконтная_карта">
+        <MappingFragment StoreEntitySet="Дисконтная карта">
+          <ScalarProperty Name="Номер_Дисконтной_карты" ColumnName="Номер Дисконтной карты" />
+          <ScalarProperty Name="Величина_скидки" ColumnName="Величина скидки" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Кассир">
+      <EntityTypeMapping TypeName="CourseProjectModel.Кассир">
+        <MappingFragment StoreEntitySet="Кассир">
+          <ScalarProperty Name="Id_Кассира" ColumnName="Id Кассира" />
+          <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+          <ScalarProperty Name="Имя" ColumnName="Имя" />
+          <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+          <ScalarProperty Name="Принят_на_работу" ColumnName="Принят на работу" />
+          <ScalarProperty Name="Уволен" ColumnName="Уволен" />
+          <ScalarProperty Name="Логин" ColumnName="Логин" />
+          <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+          <ScalarProperty Name="Соль" ColumnName="Соль" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Категория">
+      <EntityTypeMapping TypeName="CourseProjectModel.Категория">
+        <MappingFragment StoreEntitySet="Категория">
+          <ScalarProperty Name="Id_Категории" ColumnName="Id Категории" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="FK_Id_Категории" ColumnName="FK_Id Категории" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Товары">
+      <EntityTypeMapping TypeName="CourseProjectModel.Товары">
+        <MappingFragment StoreEntitySet="Товары">
+          <ScalarProperty Name="Id_Товара" ColumnName="Id Товара" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+          <ScalarProperty Name="Id_Категории" ColumnName="Id Категории" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Товары_куплены">
+      <EntityTypeMapping TypeName="CourseProjectModel.Товары_куплены">
+        <MappingFragment StoreEntitySet="Товары куплены">
+          <ScalarProperty Name="Количество" ColumnName="Количество" />
+          <ScalarProperty Name="Id_Чека" ColumnName="Id Чека" />
+          <ScalarProperty Name="Id_цена" ColumnName="Id цена" />
+          <ScalarProperty Name="Id_Товара" ColumnName="Id Товара" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Цена">
+      <EntityTypeMapping TypeName="CourseProjectModel.Цена">
+        <MappingFragment StoreEntitySet="Цена">
+          <ScalarProperty Name="Id_цена" ColumnName="Id цена" />
+          <ScalarProperty Name="Цена1" ColumnName="Цена" />
+          <ScalarProperty Name="Дата_установки" ColumnName="Дата установки" />
+          <ScalarProperty Name="Дата_окончания" ColumnName="Дата окончания" />
+          <ScalarProperty Name="Id_Товара" ColumnName="Id Товара" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Чек_Покупки">
+      <EntityTypeMapping TypeName="CourseProjectModel.Чек_Покупки">
+        <MappingFragment StoreEntitySet="Чек Покупки">
+          <ScalarProperty Name="Id_Чека" ColumnName="Id Чека" />
+          <ScalarProperty Name="Дата_и_время_покупки" ColumnName="Дата и время покупки" />
+          <ScalarProperty Name="Id_Кассира" ColumnName="Id Кассира" />
+          <ScalarProperty Name="Номер_Дисконтной_карты" ColumnName="Номер Дисконтной карты" />
+          <ScalarProperty Name="Код_оплаты" ColumnName="Код оплаты" />
+          <ScalarProperty Name="Id_Кассы" ColumnName="Id Кассы" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductsBought">
+      <EntityTypeMapping TypeName="CourseProjectModel.ProductsBought">
+        <MappingFragment StoreEntitySet="ProductsBought">
+          <ScalarProperty Name="Товар" ColumnName="Товар" />
+          <ScalarProperty Name="Количество" ColumnName="Количество" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseReceipt">
+      <EntityTypeMapping TypeName="CourseProjectModel.PurchaseReceipt">
+        <MappingFragment StoreEntitySet="PurchaseReceipt">
+          <ScalarProperty Name="Id_Чека" ColumnName="Id Чека" />
+          <ScalarProperty Name="Товар" ColumnName="Товар" />
+          <ScalarProperty Name="Количество" ColumnName="Количество" />
+          <ScalarProperty Name="Цена_за_единицу_товара" ColumnName="Цена за единицу товара" />
+          <ScalarProperty Name="Общая_цена" ColumnName="Общая цена" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ChangePrice" FunctionName="Хранилище CourseProjectModel.ChangePrice" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище CourseProjectModel.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище CourseProjectModel.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище CourseProjectModel.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище CourseProjectModel.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CourseProjectModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище CourseProjectModel.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CourseProjectModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище CourseProjectModel.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище CourseProjectModel.sp_upgraddiagrams" />
+    <EntitySetMapping Name="ProductsWithPrice">
+      <EntityTypeMapping TypeName="CourseProjectModel.ProductsWithPrice">
+        <MappingFragment StoreEntitySet="ProductsWithPrice">
+          <ScalarProperty Name="Дата_окончания" ColumnName="Дата окончания" />
+          <ScalarProperty Name="Дата_установки" ColumnName="Дата установки" />
+          <ScalarProperty Name="Цена" ColumnName="Цена" />
+          <ScalarProperty Name="Категория" ColumnName="Категория" />
+          <ScalarProperty Name="Товар" ColumnName="Товар" />
+          <ScalarProperty Name="Id_цена" ColumnName="Id цена" />
+          <ScalarProperty Name="Id_Категории" ColumnName="Id Категории" />
+          <ScalarProperty Name="Id_Товара" ColumnName="Id Товара" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommentCashier">
+      <EntityTypeMapping TypeName="CourseProjectModel.CommentCashier">
+        <MappingFragment StoreEntitySet="CommentCashier">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+          <ScalarProperty Name="Id_Кассира" ColumnName="Id Кассира" />
+          <ScalarProperty Name="Id_CommentCashier" ColumnName="Id CommentCashier" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommentProduct">
+      <EntityTypeMapping TypeName="CourseProjectModel.CommentProduct">
+        <MappingFragment StoreEntitySet="CommentProduct">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id_Товара" ColumnName="Id Товара" />
+          <ScalarProperty Name="Id_CommentProduct" ColumnName="Id CommentProduct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

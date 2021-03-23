@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+
+<style>
+    .flexcss {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .menu {
+        text-decoration: none;
+        font-family: sans-serif;
+        color: #90afc5;
+        display: inline-block;
+        padding: 3px;
+        /*background-color: #2a3132;*/
+        background-color: #000117;
+        border-bottom: 5px solid #90afc5;
+        font-weight: bold;
+    }
+
+        .menu li {
+            display: inline;
+        }
+
+    .menuAll {
+        /*background-color: #2a3132;*/
+        background-color: #000117;
+        padding: 0;
+        height: 60px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 3px;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    li.text {
+        color: #000 !important;
+        text-decoration: none;
+    }
+
+    li {
+        display: inline;
+    }
+
+    .huskyTop {
+        padding-top: 3px;
+        font-size: 40px;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .wrapper {
+        padding-bottom: 50px;
+    }
+
+    footer {
+        height: 82px;
+        /*background-color: #2a3132;*/
+        background-color: #000117;
+        width: 100%;
+        font-weight: bold;
+        padding: 16px 0px 16px 500px;
+        color: #90afc5;
+    }
+
+    .image {
+        /*background-image: url("https://i2.wp.com/divlakras.ru/wp-content/uploads/2017/06/full01-1900-1200.jpg?fit=1920%2C1200&ssl=1");*/
+        background-image: url("https://www.unitebt.com/tr/images/ngsd.jpg");
+        background-repeat: no-repeat;
+        background-position: top;
+        background-size: cover;
+    }
+</style>
+
+
+<body class="image">
+    <div class="menuAll">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="huskyTop">
+                    @Html.ActionLink("HUSKY.MARKET", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <div class=" flexcss">
+                    <div class="menu">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Покупки", "Чек_Покупки", "Home")</li>
+                            <li>@Html.ActionLink("Товары", "Товары", "Home")</li>
+                            <li>@Html.ActionLink("Кассир", "Кассир", "Home")</li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li style="margin-left: 15px">@Html.ActionLink(User.Identity.Name,"Index","Home")</li>
+                                <li>@Html.ActionLink("Выход", "SingOut", "Auth")</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Вход", "SignIn", "Auth")</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="background-color: white; border-radius: 15px; padding: 16px;min-height: calc(100vh - 166px);margin: 12px auto;">
+        @RenderBody()
+        <hr />
+    </div>
+    <footer>
+
+        <p>&copy; @DateTime.Now.Year Все права защищены</p>
+        @Html.ActionLink("DO1R", "Contact", "Home")
+
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

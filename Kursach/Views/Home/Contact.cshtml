@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Контакты";
+}
+
+<h2>@ViewBag.Title</h2>
+<h3></h3>
+
+<address>
+    г. Томск<br />
+    ул. Вершинина 39 ком.432<br />
+    <abbr title="Phone">Phone:</abbr>
+    89138633724
+</address>
+
+<address>
+    <strong>Support:</strong>   <a href="https://vk.com/tmaslyukov">https://vk.com/tmaslyuk</a><br />
+    <strong>Marketing:</strong> <a href="https://vk.com/id137602013">https://vk.com/id137602024</a>
+</address>
+
+<li>@Html.ActionLink("Вход", "SignIn", "Auth")</li>
+
+
+@*@{
+    ViewBag.Title = "Контакты";
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <h2>@ViewBag.Title</h2>
+    <h3></h3>
+
+    <address>
+        г. Томск<br />
+        ул. Вершинина 39а ком.538<br />
+        <abbr title="Phone">Phone:</abbr>
+        89138633741
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="https://vk.com/tmaslyukov">https://vk.com/tmaslyukov</a><br />
+        <strong>Marketing:</strong> <a href="https://vk.com/id137602013">https://vk.com/id137602013</a>
+    </address>
+}
+else
+{
+    <li>@Html.ActionLink("Вход", "SignIn", "Auth")</li>
+}*@
+
+@*@if (User.Identity.IsAuthenticated)
+    {
+        <li style="margin-left: 15px">@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
+        <li>@Html.ActionLink("Выход", "SingOut", "Auth")</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("Вход", "SignIn", "Auth")</li>
+    }*@

@@ -1,0 +1,88 @@
+﻿@model List<Kursach.ProductsWithPrice>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .category {
+        padding-bottom: 12px;
+    }
+
+    .chek {
+        text-decoration: none;
+        font-family: sans-serif;
+        color: #2a3132;
+        display: inline-block;
+        padding: 3px;
+        border-bottom: 5px solid #2a3132;
+        font-weight: bold;
+    }
+
+    .chekbutton {
+        background-color: #2a3132;
+        font-weight: bold;
+    }
+</style>
+<h2 class="chek">
+    Товары
+</h2>
+<br />
+<p class="btn btn-default chekbutton" style="margin-bottom:12px;">
+    @Html.ActionLink("Создать новый товар", "Create")
+</p>
+
+<div class="category">
+    @using (Html.BeginForm("Index"))
+    {
+        <table>
+            <tr>
+                <td>
+                    @Html.AntiForgeryToken()
+                    @Html.DropDownList("Id_Категории", null, htmlAttributes: new { @class = "form-control" })
+                </td>
+                <td>
+                    <input type="submit" value="Применить" class="btn btn-default chekbutton" style="color:#90afc5;" />
+                </td>
+                @*<td>
+                        @Html.ActionLink("Сбросить", "Index")
+                    </td>*@
+            </tr>
+        </table>
+    }
+</div>
+
+<table class="table">
+    <tr style="background-color:#90afc5; color:#2a3132; font-weight: bold">
+        <th>
+            Товар
+        </th>
+        <th>
+            Категория
+        </th>
+        <th>
+            Цена
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Товар)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Категория)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Цена)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить цену", "Edit", new { id = item.Id_Товара }) |
+                @Html.ActionLink("Отзывы", "Details", new { id = item.Id_Товара }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id_Товара })
+            </td>
+        </tr>
+    }
+
+</table>
